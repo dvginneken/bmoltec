@@ -60,7 +60,7 @@ def Knip(seq, begin, einde):
     seqBegin = seq[:begin:]
     seqEinde = seq[einde::]
     # Moet seqEinde ook reverse zijn?
-    seqEinde = Complementary(seqEinde)
+    seqEinde = Complementary(seqEinde[::-1])
     return seqBegin, seqEinde
 
 
