@@ -1,6 +1,7 @@
-def complementary_strand(strand):
+def Complementary(strand):
     """geeft het complimentere terug"""
     return strand.translate(str.maketrans('AaTtGgCc', 'TtAaCcGg'))
+
 
 def BerekenGcPercentage(gc, seq):
     """Met geavanceerde algoritmes en deep learning ai technology word
@@ -43,27 +44,55 @@ def CheckSequence(seq):
     for i in range(len(seq)):
         for k in range(MaxPrimerLengte - MinPrimerLengte + 1):
             # TODO: alle foute "primers" toevoegen aan een lijst en checken of nieuwe "primer" al in de lijst zit. Misschien bespaart tijd
+            # TODO: eerder checken of een nieuwe "primer" kleiner dan 17 characters bevat
             primer = ''.join(seq[i:k + MinPrimerLengte + i])
             at, gc = TelBp(primer)
             GcPercentage = BerekenGcPercentage(gc, primer)
             Tm = Temperatuur(gc, at)
-            if Tm >= 55 and Tm <= 65 and GcPercentage >= 0.50 and GcPercentage <= 0.60:
-                TopPrimers[primer] = [GcPercentage, Tm]
-    print(TopPrimers)
+            if Tm >= 55 and Tm <= 65 and GcPercentage >= 0.50 and \
+                    GcPercentage <= 0.60 and len(primer) >= 17:
+                TopPrimers[str(i) + ':' + str(k + MinPrimerLengte + i)] = [
+                    primer, GcPercentage, Tm]
+    return TopPrimers
+
+
+def Knip(seq, begin, einde):
+    seqBegin = seq[:begin:]
+    seqEinde = seq[einde::]
+    # Moet seqEinde ook reverse zijn?
+    seqEinde = Complementary(seqEinde)
+    return seqBegin, seqEinde
 
 
 if __name__ == "__main__":
-    seq = "gaattcgaggacgcggaatttgctgtacgcaatgcctttcgcgacgatctgtggggag" \
-          "gggagtctctaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
-          "aaaaaaaaaaaaaaaaaaaaaaagacgcggcagggggccggagcaagatcagacgacc" \
-          "ggtgaggacaaagggggttcccccgggggagccccggacctcgagg"
-    CheckSequence(seq)
-    print(complementary_strand(seq))
+    seq = "gaattcgaggacgcggaatttgctgtacgcaatgcctttcgcgacgatctgtggggaggggagt" \
+          "ctctgcggcgaagcaggcccgtgggaacctcgaccgatccgtagcgggttcgacaagaccaaga" \
+          "ccgtcccacgccagcccaaaaagaccccggtcacgaagagctgaccgctcgtttgcggctggtg" \
+          "acagcgttcttaccggcacctctggaccgcgtggcgggggcatcctgacgggggaaggcctggg" \
+          "ggaggcagcggtggacttcgcgttcgtgtgcggctggtgcggggaggaatgcgtcgtgtggggc" \
+          "gagcctgtcgtctcttggtggacggacaagtaccgggtgcccgacgacttcgagtgggtcatgt" \
+          "ggaggcgtcagcacctccccgcctccgctggacgcccgccgactaggcactgtccggcggatca" \
+          "tgtgaccttctgactggtcgctcgttggttcggtcatgggtcggggggatctgacgaatcgcga" \
+          "gtggtcgttgcttgagccgcatctgccacctttgggtggccggggcggccggtggaacgaccac" \
+          "cgcaccgtggtcaacgggatcctgttccgggtccggaccggtgttctggcgtgatctgccggaa" \
+          "cgctatggctcgtggaagaccatctacgagcggcatcgccgctggtcggcggacggcacctggg" \
+          "atcggatcctgcagtcggtccaggccgacgccgacctcgccgggcggatcgactggcgatggtc" \
+          "ggcgtcgactcgacgtcctgccgggcccatcagcacgcggccggcgcccgcaagacccggccgc" \
+          "gggtcccgaaaaaaggacaacgccccggcaccaccgccccgacgaggactcggacgtcccgggg" \
+          "cggcctgacctgcaagatccacctcgccggcgaaggcggctgccgcccactggccctcctgctc" \
+          "acccccggccaatggggcgatgccccgcaactggtcgggtcctggaccggatcagagtcccccg" \
+          "gccgttgggcgggcgaccccggacccggcccgaccacgtcagcggcgacaaggcatacagctcc" \
+          "cgccgcaaccgccgctacctgcgaagacccgcatccggcacacgatcccggaaccgaaggacca" \
+          "gcgggccaaccgccgccgcagaggcagagaaggcggcaggcccgccggcttcgaccgggaccac" \
+          "taccggcgacgcaacgaggtcgagcgcaccatcaaccggctcaagaacttccgcgccgtggcca" \
+          "cccgttacgacaagagggcctacgtcttccacggcaccgtcaccgccgcggcgatccgactctg" \
+          "gctccgacagtgatccgccggacagaacctagaccgcgcggcgagctggtcgacggccacgacg" \
+          "cggcagggggccggagcaagatcagacgaccggtgaggacaaagggggttcccccgggggagcc" \
+          "ccggacctcgagg"
 
-
+    begin = 80
+    einde = 400
+    seqBegin, seqEinde = Knip(seq, begin, einde)
+    print(seqBegin, seqEinde)
+    print("BEGIN", CheckSequence(seqBegin))
+    print("EIND", CheckSequence(seqEinde))
