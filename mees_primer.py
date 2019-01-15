@@ -63,6 +63,17 @@ def Knip(seq, begin, einde):
     seqEinde = Complementary(seqEinde[::-1])
     return seqBegin, seqEinde
 
+def maakParen(einde,seqBegin,seqEinde,maxPcr):
+    print(seqBegin)
+    primerParen = []
+    for i in seqBegin:
+        bPositie = int(i.split(':')[0])
+        for k in seqEinde:
+            ePositie = int(k.split(':')[1]) + einde
+            verschil = ePositie - bPositie
+            if verschil >= maxPcr:
+                primerParen.append([verschil,[i,seqBegin[i][0],seqBegin[i][1],seqBegin[i][2]],[k,seqEinde[k][0],seqEinde[k][1],seqEinde[k][2]]])
+    return primerParen
 
 if __name__ == "__main__":
     seq = "gaattcgaggacgcggaatttgctgtacgcaatgcctttcgcgacgatctgtggggaggggagt" \
@@ -96,3 +107,5 @@ if __name__ == "__main__":
     print(seqBegin, seqEinde)
     print("BEGIN", CheckSequence(seqBegin))
     print("EIND", CheckSequence(seqEinde))
+    print('\n')
+    print(maakParen(einde,CheckSequence(seqBegin),CheckSequence(seqEinde),8))
