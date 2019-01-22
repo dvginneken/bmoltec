@@ -66,6 +66,8 @@ class Schermpje(wx.Frame):
              DNA sequentie input. Ook word dit veld leeg gemaakt mocht er al informatie staan"""
         event.GetEventObject().GetLabel()
         file = easygui.fileopenbox()
+        file = open(file, 'r')
+        file = file.readlines()
         txt = ParseFile(file)
         self.invoer.invultekst1.Clear()
         self.invoer.invultekst1.write(txt)
@@ -88,7 +90,7 @@ class Schermpje(wx.Frame):
         """" Deze functie verbergd het invoerscherm en laat het uitvoerscherm zien wanneer
              er op de knop 'Primers maken' gedrukt word."""
         event.GetEventObject().GetLabel()
-        self.sequentie = self.invoer.invultekst1.GetValue()
+        self.sequentie = ParseFile(self.invoer.invultekst1.GetValue())
         self.start = self.invoer.invultekst2.GetValue()
         self.stop = self.invoer.invultekst3.GetValue()
         self.max = self.invoer.invultekst4.GetValue()
@@ -112,15 +114,13 @@ class Schermpje(wx.Frame):
         self.invoer.Show()
         self.totbox.Layout()
 
-def ParseFile(filename):
+def ParseFile(tekst):
     '''
     Parsed files op formaat die als voorbeeld is gegeven op onenote
     :param filename: naam van de file die geopend moet worden
     :return: string van met een sequentie
     '''
-    file = open(filename,'r')
-    seq = file.readlines()
-    seqfasta = [item.strip() for item in seq] #haalt enters eruit
+    seqfasta = [item.strip() for item in tekst] #haalt enters eruit
     seq = []
     for i in seqfasta:
         if i: #checkt of i leeg is. Anders geeft hij een error bij de volgende if
