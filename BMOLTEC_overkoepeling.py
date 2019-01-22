@@ -5,11 +5,12 @@
 import wx
 import sys
 import webbrowser
-import easygui
+#import easygui
 
 from BMOLTEC_welkom import Panel1
 from BMOLTEC_invoer import Panel2
 from BMOLTEC_uitvoer import Panel3
+from mees_primer import Primers_Maken
 
 class Schermpje(wx.Frame):
     def __init__(self, parent, id, title):
@@ -89,9 +90,14 @@ class Schermpje(wx.Frame):
         """" Deze functie verbergd het invoerscherm en laat het uitvoerscherm zien wanneer
              er op de knop 'Primers maken' gedrukt word."""
         event.GetEventObject().GetLabel()
+        self.sequentie = self.invoer.invultekst1.GetValue()
+        self.start = self.invoer.invultekst2.GetValue()
+        self.stop = self.invoer.invultekst3.GetValue()
+        self.primers = Primers_Maken(self.sequentie, self.start, self.stop)
         self.invoer.Hide()
         self.uitvoer.Show()
         self.totbox.Layout()
+
 
     def onButtonOpnieuw(self, event):
         """" Deze functie verbergd het uitvoerscherm en laat het invoerscherm zien wanneer

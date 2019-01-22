@@ -14,6 +14,9 @@ class Panel2(wx.Panel):
         final = self.boxCreeren2()
         self.SetSizer(final)
 
+
+
+
     def global_vars(self):
         """" Hier worden de teksten van het 'Invoer' panel gecreëerd en de mogelijkheid
              om zelf tekst in te voeren aangemaakt."""
@@ -38,6 +41,8 @@ class Panel2(wx.Panel):
         self.invultekst2 = wx.TextCtrl(self, style=wx.TE_MULTILINE)  # Startpositie
         self.invultekst3 = wx.TextCtrl(self, style=wx.TE_MULTILINE)  # Stoppositie
         self.invultekst4 = wx.TextCtrl(self, style=wx.TE_MULTILINE)  # Maximale lengte PCR product
+
+
 
     def boxCreeren1(self):
         """" Deze functie creëert de UI van de 'Invoer' panel. De onderkant slaat op hoe

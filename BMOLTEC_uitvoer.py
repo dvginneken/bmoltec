@@ -3,6 +3,9 @@
     __Klas__ = "Bin2A" """
 
 import wx
+#from BMOLTEC_overkoepeling import Schermpje
+from mees_primer import Primers_Maken
+
 
 class Panel3(wx.Panel):
     def __init__(self, parent):
@@ -12,6 +15,7 @@ class Panel3(wx.Panel):
         self.boxCreeren1()
         final = self.boxCreeren2()
         self.SetSizer(final)
+
 
     def global_vars(self):
         """" Hier worden de teksten van het 'Uitvoer' panel gecreëerd samen met de buttons."""
