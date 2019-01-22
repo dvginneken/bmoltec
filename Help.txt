@@ -1,4 +1,5 @@
-			Wat betekenen de knoppen:
+Wat betekenen de knoppen:
+
 
 Afsluiten: 		Hiermee wordt het programma afgesloten.
 
@@ -19,7 +20,8 @@ Opnieuw: 		Klik hierop om terug te keren naar het invoerscherm. Ook worden
 
 
 
-					Wat betekend de invoer:
+Wat betekend de invoer:
+
 
 DNA sequentie plakken of uploaden:	Plak of upload hier de gewenste sequentie waar
 					primers uitgehaald moeten worden.
@@ -32,7 +34,8 @@ Maximale lengte van PCR product:	Hier moet worden opgegeven hoe lang het gewilde
 
 					
 
-					Wat betekend de uitvoer:
+Wat betekend de uitvoer:
+
 
 Forward primer: 			Hier wordt de gevonden primer weergegeven
 					genoteerd van 5' naar 3'.
