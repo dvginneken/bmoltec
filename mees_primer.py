@@ -11,18 +11,24 @@ class Primers_Maken():
     def uitvoeren(self):
         seqBegin, seqEinde = self.Knip(self.seq, self.begin, self.einde)
         primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin), self.CheckSequence(seqEinde), self.max)
+        list.sort(primerParen)
+        primerParen = primerParen[:10:]
         self.primer1 = primerParen
 
     def Complementary(self, strand):
-        """geeft het complimentere terug"""
+        '''dna sequentie word in zijn complimentair overgezet
+        :param strand: dna sequentie
+        :return: complimentair
+        '''
         return strand.translate(str.maketrans('AaTtGgCc', 'TtAaCcGg'))
 
 
     def BerekenGcPercentage(self, gc, seq):
-        """Met geavanceerde algoritmes en deep learning ai technology word
-        hier het percentage GC onderzocht
-        :return percentage gc in een float
-        """
+        '''
+        :param gc: aantal gc van TelBp()
+        :param seq: de primer
+        :return: gc percentage float met 2 cijfers achter de komma
+        '''
         GcPercentage = gc / len(seq)
         return float("%.2f" % GcPercentage)
 
@@ -30,6 +36,7 @@ class Primers_Maken():
     def TelBp(self, seq):
         """telt het aantal c+g en a+t in een gegeven sequentie. dit is nodig
         voor de temperatuur te berekenen en om de gc content te berekenen
+        :param seq: primer sequentie
         :return at: aantal at in de sequentie
                 gc: aantal gc in de sequentie
         """
@@ -41,6 +48,8 @@ class Primers_Maken():
 
     def Temperatuur(self, gc, at):
         """Berekend de smelt temperatuur
+        :param gc: aantal gc van TelBp()
+        :param at: aantal at van TelBp()
         :return Tm: smelt temperatuur van de mogelijke primer
         """
         Tm = (2 * at) + (4 * gc)
@@ -50,6 +59,7 @@ class Primers_Maken():
     def CheckSequence(self, seq):
         """ Checkt elke mogelijke combinatie van 17 tot en met 25 lengte of
         ze voldoen aan de primer dingen
+        :param seq: dna sequentie
         :return TopPrimers: Dict met alle mogelijke primers items zijn GC percentage en smeltpunt
         """
         seq = list(seq)
@@ -72,6 +82,13 @@ class Primers_Maken():
 
 
     def Knip(self, seq, begin, einde):
+        '''haalt het stuk eruit waar niet gezocht mag worden naar een primer en
+        geeft de twee buiten sequenties terug
+        :param seq: de gehele sequentie
+        :param begin: begin van het verbode deel
+        :param einde: einden van het verbode deel
+        :return: geeft de twee sequenties terug
+        '''
         seqBegin = seq[:begin:]
         seqEinde = seq[einde::]
         # Moet seqEinde ook reverse zijn?
@@ -80,6 +97,22 @@ class Primers_Maken():
 
 
     def maakParen(self, einde, seqBegin, seqEinde, maxPcr):
+        ''' checkt elke begin primer met een eind primer voor of ze matchen
+        met bv de tm verschil en of ze niet te ver uit elkaar liggen
+        :param einde: einde van het verbode deel van de sequentie
+        :param seqBegin: sequentie van voor het verbode deel
+        :param seqEinde: sequentie van na het verbode del
+        :param maxPcr: maximale lengte wat de pcr mag hebben
+        :return: primerparen lijst met elke item alle informatie over een
+        primer paar. de informatie de elke item bevat is:
+        primerParen[i][0] = integer van aantal basepare verschil
+        primerParen[i][1][0] = primer begin seq
+        primerParen[i][1][1] = primer begin gc percentage
+        primerParen[i][1][2] = primer begin Tm
+        primerParen[i][2][0] = primer eind seq
+        primerParen[i][2][1] = primer eind gc percentage
+        primerParen[i][2][2] = primer eind Tm
+        '''
         primerParen = []
         for i in seqBegin:
             bPositie = int(i.split(':')[0])
@@ -87,7 +120,7 @@ class Primers_Maken():
                 ePositie = int(k.split(':')[1]) + einde
                 verschil = ePositie - bPositie
                 tmVerschil = seqBegin[i][2] - seqEinde[k][2]
-                if (verschil <= maxPcr) and ((tmVerschil >= -2) and (tmVerschil <= 2)):
+                if (verschil <= maxPcr) and ((tmVerschil >= -2) and(tmVerschil <= 2)):
                     primerParen.append([verschil,
                                         [i, seqBegin[i][0], seqBegin[i][1],
                                          seqBegin[i][2]],
@@ -97,8 +130,6 @@ class Primers_Maken():
 
 if __name__ == "__main__":
     Primers_Maken()
-
-
 
     # seq = "gaattcgaggacgcggaatttgctgtacgcaatgcctttcgcgacgatctgtggggaggggagt" \
     #       "ctctgcggcgaagcaggcccgtgggaacctcgaccgatccgtagcgggttcgacaagaccaaga" \
@@ -124,11 +155,12 @@ if __name__ == "__main__":
     #       "gctccgacagtgatccgccggacagaacctagaccgcgcggcgagctggtcgacggccacgacg" \
     #       "cggcagggggccggagcaagatcagacgaccggtgaggacaaagggggttcccccgggggagcc" \
     #       "ccggacctcgagg"
-
-    #begin = 80
-    #einde = 400
-
-    # print(seqBegin, seqEinde)
-    # print("BEGIN", CheckSequence(seqBegin))
-    # print("EIND", CheckSequence(seqEinde))
-
+    #
+    # maxpcr = 420
+    # begin = 80
+    # einde = 400
+    # test = Primers_Maken(seq, begin, einde, maxpcr)
+    # primers = test.primer1
+    # list.sort(primers)
+    # primers = primers[:20:]
+    # print(primers)
