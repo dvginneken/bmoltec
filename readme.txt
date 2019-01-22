@@ -13,7 +13,7 @@ en te gebruiken voor dit script. Om dit programma te gebruiken moeten er een aan
 modules worden ge�nstalleerd. 
 Deze modules zijn:
            - wx
-		   - easygui
+	- easygui
 
 Om dit te installeren moet er in de python terminal (deze kan links onder gevonden
 worden tussen "TODO" en "Python Console") de volgende commands worden uitgevoerd:

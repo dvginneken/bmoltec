@@ -18,6 +18,9 @@ Maak primers:		Als alle invoer correct is opgegeven wordt door op deze knop
 Opnieuw: 		Klik hierop om terug te keren naar het invoerscherm. Ook worden
 			reeds ingevoerde velden leeg gemaakt.
 
+Zie alle primers:   Dit opent een textfile waarin alle mogelijke primerparen staan,
+                    op het scherm worden namelijk alleen de eerste 5 paren weergegeven.
+
 
 
 Wat betekend de invoer:

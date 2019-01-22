@@ -39,7 +39,7 @@ class Primers_Maken():
                                      self.CheckSequence(seqEinde), self.max)
         list.sort(primerParen)
         self.WriteFile(primerParen)
-        primerParen = primerParen[:10:]
+        primerParen = primerParen[:5:]
         self.primer1 = primerParen
 
     def WriteFile(self, primerParen):
@@ -63,7 +63,7 @@ class Primers_Maken():
                 primerParen[i][2][2]) + "\tTm: " + str(
                 primerParen[i][2][3]) + "\n\n"
         file.write(tekst)
-        file.close
+        file.close()
 
     def Complementary(self, strand):
         '''dna sequentie word in zijn complimentair overgezet
