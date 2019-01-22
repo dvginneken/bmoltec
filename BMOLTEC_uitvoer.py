@@ -12,13 +12,13 @@ class Panel3(wx.Panel):
     def __init__(self, parent):
         """" Hier worden de globale variabelen en de overige functies aangeroepen."""
         wx.Panel.__init__(self, parent, -1)
-        self.global_vars()
+        # self.global_vars()
         self.boxCreeren1()
         final = self.boxCreeren2()
         self.SetSizer(final)
 
 
-    def global_vars(self):
+    # def global_vars(self):
         """" Hier worden de teksten van het 'Uitvoer' panel gecreëerd samen met de buttons."""
         #string = "output: " + self.primers
         # self.tekst1 = wx.StaticText(self, -1, "poep")
@@ -27,8 +27,8 @@ class Panel3(wx.Panel):
         # self.tekst4 = wx.StaticText(self, -1, "Reverse primer:")
         # self.tekst5 = wx.StaticText(self, -1, "GC%:")
         # self.tekst6 = wx.StaticText(self, -1, "TM:")
-        self.tekst7 = wx.StaticText(self, -1, "Lengte van PCR product:")
-        font = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
+        # self.tekst7 = wx.StaticText(self, -1, "Lengte van PCR product:")
+        # font = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
         # self.tekst1.SetFont(font)
         # font2 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
         # self.tekst2.SetFont(font2)
@@ -40,10 +40,10 @@ class Panel3(wx.Panel):
         # self.tekst5.SetFont(font5)
         # font6 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
         # self.tekst6.SetFont(font6)
-        font7 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        self.tekst7.SetFont(font7)
-        self.button1 = wx.Button(self, -1, "Afsluiten")
-        self.button2 = wx.Button(self, -1, "Opnieuw")
+        # font7 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
+        # self.tekst7.SetFont(font7)
+        # self.button1 = wx.Button(self, -1, "Afsluiten")
+        # self.button2 = wx.Button(self, -1, "Opnieuw")
 
     def boxCreeren1(self):
         """" Deze functie creëert de UI van de 'Uitvoer' paneel. De onderkant slaat op hoe
@@ -60,8 +60,8 @@ class Panel3(wx.Panel):
         # posities5.Add(self.tekst5, 1, wx.EXPAND)
         # posities6 = wx.BoxSizer(wx.HORIZONTAL)
         # posities6.Add(self.tekst6, 1, wx.EXPAND)
-        posities7 = wx.BoxSizer(wx.HORIZONTAL)
-        posities7.Add(self.tekst7, 1, wx.EXPAND)
+        # posities7 = wx.BoxSizer(wx.HORIZONTAL)
+        # posities7.Add(self.tekst7, 1, wx.EXPAND)
         onderkant1 = wx.BoxSizer(wx.VERTICAL)  # Tekst + posities
         # onderkant1.Add(posities1, 1, wx.EXPAND)
         # onderkant1.Add(posities2, 1, wx.EXPAND)
@@ -69,7 +69,11 @@ class Panel3(wx.Panel):
         # onderkant1.Add(posities4, 1, wx.EXPAND)
         # onderkant1.Add(posities5, 1, wx.EXPAND)
         # onderkant1.Add(posities6, 1, wx.EXPAND)
-        onderkant1.Add(posities7, 1, wx.EXPAND)
+
+        self.button1 = wx.Button(self, -1, "Afsluiten")
+        self.button2 = wx.Button(self, -1, "Opnieuw")
+
+        #onderkant1.Add(posities7, 1, wx.EXPAND)
         self.onderkant = wx.BoxSizer(wx.HORIZONTAL)  # Gehele onderkant
         self.onderkant.Add(onderkant1, 1, wx.EXPAND)
 
@@ -97,6 +101,30 @@ class Panel3(wx.Panel):
         self.primers = primers
         print("primer: " , self.primers)
 
+        for a in self.primers:
+            print("pcr product: ", a[0], "bp")
+            primer1 = a[1]
+            primer2 = a[2]
+            print("primer 1: ")
+            print("positie: ", primer1[0])
+            print("sequentie: ", primer1[1])
+            print("GC: ", primer1[2])
+            print("TM: ", primer1[3])
+            print("primer 2: ")
+            print("positie: ", primer2[0])
+            print("sequentie: ", primer2[1])
+            print("GC: ", primer2[2])
+            print("TM: ", primer2[3])
+            print("\n")
+
+
+
+            self.tekst7 = wx.StaticText(self, -1, str(a[0]))
+            font = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
+
+            posities7 = wx.BoxSizer(wx.HORIZONTAL)
+            posities7.Add(self.tekst7, 1, wx.EXPAND)
+        onderkant1 = wx.BoxSizer(wx.VERTICAL)
 
 if __name__ == "__main__":
     class Schermpje(wx.Frame):
