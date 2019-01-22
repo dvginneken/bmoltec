@@ -1,7 +1,19 @@
+""""__Auteurs__ = "Kenrick de Grijs, Daphne van Ginneken, Mees Kerssens"
+    __Versie__ = "1.0.1"
+    __Klas__ = "Bin2A" """
+
 class Primers_Maken():
     primer1 = None
 
     def __init__(self, seq, begin, einde, max):
+        """
+        De variabelen worden hier geïnitieerd en de functie uitvoeren() wordt aangeroepen
+        om het script te starten.
+        :param seq: De DNA sequentie
+        :param begin: Linkergrens
+        :param einde: Rechtergrens
+        :param max: Maximale lengte PCR product
+        """
         self.seq = seq
         self.begin = int(begin)
         self.einde = int(einde)
@@ -10,6 +22,18 @@ class Primers_Maken():
 
 
     def uitvoeren(self):
+        """
+        De functie Knip() wordt aangeroepen, hieruit komt:
+         :var seqBegin: Het gebied waarin primer 1 gezocht mag worden
+         :var seqEinde: Het gebied waarin primer 2 gezocht mag worden
+
+        De functie maakParen wordt aangeroepen, hieruit komt:
+        :var primerParen: In deze lijst staan alle primer en de bijbehorende informatie
+
+        De primerparen worden naar een textfile geschreven met de functie WriteFile()
+        De eerste 10 primerparen worden opgeslagen in self.primer1 en dit wordt gebruikt door
+        Panel3 om in het uitvoerscherm te zetten.
+        """
         seqBegin, seqEinde = self.Knip(self.seq, self.begin, self.einde)
         primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin),
                                      self.CheckSequence(seqEinde), self.max)
@@ -19,6 +43,10 @@ class Primers_Maken():
         self.primer1 = primerParen
 
     def WriteFile(self, primerParen):
+        """
+        Deze functie schrijft alle mogelijke primerparen overzichtelijk naar een textbestand.
+        :param primerParen: de lijst met alle mogelijke primerparen
+        """
         file = open('primerparen.txt', 'w')
         tekst = ''
         for i in range(len(primerParen)):
@@ -143,37 +171,3 @@ class Primers_Maken():
 
 if __name__ == "__main__":
     Primers_Maken()
-
-    # seq = "gaattcgaggacgcggaatttgctgtacgcaatgcctttcgcgacgatctgtggggaggggagt" \
-    #       "ctctgcggcgaagcaggcccgtgggaacctcgaccgatccgtagcgggttcgacaagaccaaga" \
-    #       "ccgtcccacgccagcccaaaaagaccccggtcacgaagagctgaccgctcgtttgcggctggtg" \
-    #       "acagcgttcttaccggcacctctggaccgcgtggcgggggcatcctgacgggggaaggcctggg" \
-    #       "ggaggcagcggtggacttcgcgttcgtgtgcggctggtgcggggaggaatgcgtcgtgtggggc" \
-    #       "gagcctgtcgtctcttggtggacggacaagtaccgggtgcccgacgacttcgagtgggtcatgt" \
-    #       "ggaggcgtcagcacctccccgcctccgctggacgcccgccgactaggcactgtccggcggatca" \
-    #       "tgtgaccttctgactggtcgctcgttggttcggtcatgggtcggggggatctgacgaatcgcga" \
-    #       "gtggtcgttgcttgagccgcatctgccacctttgggtggccggggcggccggtggaacgaccac" \
-    #       "cgcaccgtggtcaacgggatcctgttccgggtccggaccggtgttctggcgtgatctgccggaa" \
-    #       "cgctatggctcgtggaagaccatctacgagcggcatcgccgctggtcggcggacggcacctggg" \
-    #       "atcggatcctgcagtcggtccaggccgacgccgacctcgccgggcggatcgactggcgatggtc" \
-    #       "ggcgtcgactcgacgtcctgccgggcccatcagcacgcggccggcgcccgcaagacccggccgc" \
-    #       "gggtcccgaaaaaaggacaacgccccggcaccaccgccccgacgaggactcggacgtcccgggg" \
-    #       "cggcctgacctgcaagatccacctcgccggcgaaggcggctgccgcccactggccctcctgctc" \
-    #       "acccccggccaatggggcgatgccccgcaactggtcgggtcctggaccggatcagagtcccccg" \
-    #       "gccgttgggcgggcgaccccggacccggcccgaccacgtcagcggcgacaaggcatacagctcc" \
-    #       "cgccgcaaccgccgctacctgcgaagacccgcatccggcacacgatcccggaaccgaaggacca" \
-    #       "gcgggccaaccgccgccgcagaggcagagaaggcggcaggcccgccggcttcgaccgggaccac" \
-    #       "taccggcgacgcaacgaggtcgagcgcaccatcaaccggctcaagaacttccgcgccgtggcca" \
-    #       "cccgttacgacaagagggcctacgtcttccacggcaccgtcaccgccgcggcgatccgactctg" \
-    #       "gctccgacagtgatccgccggacagaacctagaccgcgcggcgagctggtcgacggccacgacg" \
-    #       "cggcagggggccggagcaagatcagacgaccggtgaggacaaagggggttcccccgggggagcc" \
-    #       "ccggacctcgagg"
-    #
-    # maxpcr = 420
-    # begin = 80
-    # einde = 400
-    # test = Primers_Maken(seq, begin, einde, maxpcr)
-    # primers = test.primer1
-    # list.sort(primers)
-    # primers = primers[:20:]
-    # print(primers)

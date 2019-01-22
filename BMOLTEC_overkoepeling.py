@@ -10,11 +10,11 @@ import easygui
 from BMOLTEC_welkom import Panel1
 from BMOLTEC_invoer import Panel2
 from BMOLTEC_uitvoer import Panel3
-from mees_primer import Primers_Maken
+from BMOLTEC_primers import Primers_Maken
 
 class Schermpje(wx.Frame):
     def __init__(self, parent, id, title):
-        """" Hier worden de andere panels aangeroepen en knoppen gebonden. Het invoer en
+        """" Hier worden de andere panels aangeroepen. Het invoer en
              uitvoer scherm zijn verborgen zodat het welkom scherm als eerste verschijnt."""
         wx.Frame.__init__(self, parent, id, title, size=(1500, 800))
         self.welkom = Panel1(self)
@@ -32,7 +32,7 @@ class Schermpje(wx.Frame):
         self.Show(True)
 
     def knoppenBinden(self):
-        """" Hier worden de buttons geactiveerd voor de verschillende panels."""
+        """" Hier worden de buttons geactiveerd en de knoppen gebonden voor de verschillende panels."""
         self.welkom.button1.Bind(wx.EVT_BUTTON, self.onButtonExit)
         self.welkom.button2.Bind(wx.EVT_BUTTON, self.onButtonHelp)
         self.welkom.button3.Bind(wx.EVT_BUTTON, self.onButtonVolgende)
@@ -86,7 +86,13 @@ class Schermpje(wx.Frame):
 
     def onButtonMaakprimers(self, event):
         """" Deze functie verbergd het invoerscherm en laat het uitvoerscherm zien wanneer
-             er op de knop 'Primers maken' gedrukt word."""
+             er op de knop 'Primers maken' gedrukt word.
+
+             De 4 variabelen (sequentie, start, stop en max)
+             uit het invoerscherm worden opgehaald. De klasse Primers_Maken wordt aangeroepen en de 4
+             variabelen worden daar aan meegegeven.
+
+             De functie updatePrimers uit Panel3 wordt uitgevoerd om de primerparen op te slaan in dat scherm."""
         event.GetEventObject().GetLabel()
         self.sequentie = self.invoer.invultekst1.GetValue()
         self.start = self.invoer.invultekst2.GetValue()
