@@ -48,15 +48,13 @@ class Primers_Maken():
         file = open('primerparen.txt', 'w')
         tekst = ''
         for i in range(len(primerParen)):
-            tekst += "primerpaar " + str(i) + "\tpcr product lengte " + str(
+            tekst += "primerpaar " + str(i+1) + "\tpcr product lengte " + str(
                 primerParen[i][0]) + '\n'
-            tekst += "\t primer begin positie = " + primerParen[i][1][
-                0] + "\tprimer sequentie: " + primerParen[i][1][
+            tekst += "\tprimer sequentie: " + primerParen[i][1][
                          1] + "\t gc percentage: " + str(
                 primerParen[i][1][2]) + "\tTm: " + str(
                 primerParen[i][1][3]) + '\n'
-            tekst += "\t primer eind positie = " + primerParen[i][2][
-                0] + "\tprimer sequentie: " + primerParen[i][2][
+            tekst += "\tprimer sequentie: " + primerParen[i][2][
                          1] + "\t gc percentage: " + str(
                 primerParen[i][2][2]) + "\tTm: " + str(
                 primerParen[i][2][3]) + "\n\n"

@@ -43,7 +43,6 @@ class Panel3(wx.Panel):
 
     def updatePrimers(self, primers):
         self.primers = primers
-        print("primer: " , self.primers)
         aantal_primerparen = 0
 
 
