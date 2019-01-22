@@ -26,10 +26,8 @@ class Primers_Maken():
         De functie Knip() wordt aangeroepen, hieruit komt:
          :var seqBegin: Het gebied waarin primer 1 gezocht mag worden
          :var seqEinde: Het gebied waarin primer 2 gezocht mag worden
-
         De functie maakParen wordt aangeroepen, hieruit komt:
         :var primerParen: In deze lijst staan alle primer en de bijbehorende informatie
-
         De primerparen worden naar een textfile geschreven met de functie WriteFile()
         De eerste 10 primerparen worden opgeslagen in self.primer1 en dit wordt gebruikt door
         Panel3 om in het uitvoerscherm te zetten.

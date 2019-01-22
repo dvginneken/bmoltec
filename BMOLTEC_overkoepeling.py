@@ -43,6 +43,7 @@ class Schermpje(wx.Frame):
         self.invoer.button5.Bind(wx.EVT_BUTTON, self.onButtonMaakprimers)
         self.uitvoer.button1.Bind(wx.EVT_BUTTON, self.onButtonExit)
         self.uitvoer.button2.Bind(wx.EVT_BUTTON, self.onButtonOpnieuw)
+        self.uitvoer.button3.Bind(wx.EVT_BUTTON, self.onButtonPrimers)
 
     def onButtonExit(self, event):
         """" Deze functie zorgt ervoor dat wanneer er op de 'Exit' knop word gedrukt
@@ -71,6 +72,12 @@ class Schermpje(wx.Frame):
         txt = ParseFile(file)
         self.invoer.invultekst1.Clear()
         self.invoer.invultekst1.write(txt)
+
+    def onButtonPrimers(self, event):
+        """ Deze functie exporteert alle primers naar een text file"""
+        event.GetEventObject().GetLabel()
+        webbrowser.open("primerparen.txt")
+
 
 
     def onButtonVolgende(self, event):
