@@ -1,17 +1,17 @@
 
 class Primers_Maken():
     primer1 = None
-    def __init__(self, seq, begin, einde):
+    def __init__(self, seq, begin, einde, max):
         self.seq = seq
         self.begin = int(begin)
         self.einde = int(einde)
+        self.max = int(max)
         self.uitvoeren()
 
     def uitvoeren(self):
         seqBegin, seqEinde = self.Knip(self.seq, self.begin, self.einde)
-        primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin), self.CheckSequence(seqEinde), 420)
+        primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin), self.CheckSequence(seqEinde), self.max)
         self.primer1 = primerParen
-        print("Primer: " , self.primer1)
 
     def Complementary(self, strand):
         """geeft het complimentere terug"""
