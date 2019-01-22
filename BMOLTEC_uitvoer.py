@@ -47,20 +47,8 @@ class Panel3(wx.Panel):
 
         for a in self.primers:
             aantal_primerparen+=1
-            print("pcr product: ", a[0], "bp")
             primer1 = a[1]
             primer2 = a[2]
-            print("primer 1: ")
-            print("positie: ", primer1[0])
-            print("sequentie: ", primer1[1])
-            print("GC: ", primer1[2])
-            print("TM: ", primer1[3])
-            print("primer 2: ")
-            print("positie: ", primer2[0])
-            print("sequentie: ", primer2[1])
-            print("GC: ", primer2[2])
-            print("TM: ", primer2[3])
-            print("\n")
 
             primerteller = wx.StaticText(self, -1, "Primerpaar "+str(aantal_primerparen))
             lengte = wx.StaticText(self, -1, "Lengte PCR product: "+str(a[0]))
@@ -106,8 +94,6 @@ class Panel3(wx.Panel):
             self.empy_box.Add(primer_box, 1, wx.EXPAND)
             self.empy_box.Add(f_box, 1, wx.EXPAND)
             self.empy_box.Add(r_box, 1, wx.EXPAND)
-
-        print(aantal_primerparen)
 
 
 

@@ -22,7 +22,7 @@ class Panel1(wx.Panel):
         self.panel2 = wx.Panel(self, -1)
         cbox = wx.BoxSizer(wx.HORIZONTAL)
         cbox.Add(self.panel2)
-        self.welkomtekst = wx.StaticText(self, -1, "Welkom bij $W@GG@ primerprogramma")
+        self.welkomtekst = wx.StaticText(self, -1, "Welkom bij het primerprogramma")
         font = wx.Font(40, wx.DEFAULT, wx.ITALIC, wx.BOLD)
         self.welkomtekst.SetFont(font)
         vbox = wx.BoxSizer(wx.VERTICAL)
