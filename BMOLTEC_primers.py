@@ -2,6 +2,7 @@
     __Versie__ = "1.0.1"
     __Klas__ = "Bin2A" """
 
+
 class Primers_Maken():
     primer1 = None
 
@@ -19,7 +20,6 @@ class Primers_Maken():
         self.einde = int(einde)
         self.max = int(max)
         self.uitvoeren()
-
 
     def uitvoeren(self):
         """
@@ -50,13 +50,18 @@ class Primers_Maken():
         file = open('primerparen.txt', 'w')
         tekst = ''
         for i in range(len(primerParen)):
-            tekst += "primerpaar " + str(i) + "\tpcr product lengte " + str(primerParen[i][0]) + '\n'
-            tekst += "\t primer begin = " + primerParen[i][1][
-                0] + "\t gc percentage: " + str(
-                primerParen[i][1][1]) + "\tTm: " + str(primerParen[i][1][2]) + '\n'
-            tekst += "\t primer eind = " + primerParen[i][2][
-                0] + "\t gc percentage: " + str(
-                primerParen[i][2][1]) + "\tTm: " + str(primerParen[i][2][2]) + "\n\n"
+            tekst += "primerpaar " + str(i) + "\tpcr product lengte " + str(
+                primerParen[i][0]) + '\n'
+            tekst += "\t primer begin positie = " + primerParen[i][1][
+                0] + "\tprimer sequentie: " + primerParen[i][1][
+                         1] + "\t gc percentage: " + str(
+                primerParen[i][1][2]) + "\tTm: " + str(
+                primerParen[i][1][3]) + '\n'
+            tekst += "\t primer eind positie = " + primerParen[i][2][
+                0] + "\tprimer sequentie: " + primerParen[i][2][
+                         1] + "\t gc percentage: " + str(
+                primerParen[i][2][2]) + "\tTm: " + str(
+                primerParen[i][2][3]) + "\n\n"
         file.write(tekst)
         file.close
 
@@ -164,7 +169,8 @@ class Primers_Maken():
                     primerParen.append([verschil,
                                         [i, seqBegin[i][0], seqBegin[i][1],
                                          seqBegin[i][2]],
-                                        [k, seqEinde[k][0], seqEinde[k][1],
+                                        [k, seqEinde[k][0][::-1],
+                                         seqEinde[k][1],
                                          seqEinde[k][2]]])
         return primerParen
 
