@@ -1,6 +1,6 @@
-
 class Primers_Maken():
     primer1 = None
+
     def __init__(self, seq, begin, einde, max):
         self.seq = seq
         self.begin = int(begin)
@@ -8,12 +8,29 @@ class Primers_Maken():
         self.max = int(max)
         self.uitvoeren()
 
+
     def uitvoeren(self):
         seqBegin, seqEinde = self.Knip(self.seq, self.begin, self.einde)
-        primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin), self.CheckSequence(seqEinde), self.max)
+        primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin),
+                                     self.CheckSequence(seqEinde), self.max)
         list.sort(primerParen)
+        self.WriteFile(primerParen)
         primerParen = primerParen[:10:]
         self.primer1 = primerParen
+
+    def WriteFile(self, primerParen):
+        file = open('primerparen.txt', 'w')
+        tekst = ''
+        for i in range(len(primerParen)):
+            tekst += "primerpaar " + str(i) + "\tpcr product lengte " + str(primerParen[i][0]) + '\n'
+            tekst += "\t primer begin = " + primerParen[i][1][
+                0] + "\t gc percentage: " + str(
+                primerParen[i][1][1]) + "\tTm: " + str(primerParen[i][1][2]) + '\n'
+            tekst += "\t primer eind = " + primerParen[i][2][
+                0] + "\t gc percentage: " + str(
+                primerParen[i][2][1]) + "\tTm: " + str(primerParen[i][2][2]) + "\n\n"
+        file.write(tekst)
+        file.close
 
     def Complementary(self, strand):
         '''dna sequentie word in zijn complimentair overgezet
@@ -21,7 +38,6 @@ class Primers_Maken():
         :return: complimentair
         '''
         return strand.translate(str.maketrans('AaTtGgCc', 'TtAaCcGg'))
-
 
     def BerekenGcPercentage(self, gc, seq):
         '''
@@ -31,7 +47,6 @@ class Primers_Maken():
         '''
         GcPercentage = gc / len(seq)
         return float("%.2f" % GcPercentage)
-
 
     def TelBp(self, seq):
         """telt het aantal c+g en a+t in een gegeven sequentie. dit is nodig
@@ -45,7 +60,6 @@ class Primers_Maken():
         at = len(seq) - gc
         return at, gc
 
-
     def Temperatuur(self, gc, at):
         """Berekend de smelt temperatuur
         :param gc: aantal gc van TelBp()
@@ -54,7 +68,6 @@ class Primers_Maken():
         """
         Tm = (2 * at) + (4 * gc)
         return Tm
-
 
     def CheckSequence(self, seq):
         """ Checkt elke mogelijke combinatie van 17 tot en met 25 lengte of
@@ -80,7 +93,6 @@ class Primers_Maken():
                         primer, GcPercentage, Tm]
         return TopPrimers
 
-
     def Knip(self, seq, begin, einde):
         '''haalt het stuk eruit waar niet gezocht mag worden naar een primer en
         geeft de twee buiten sequenties terug
@@ -94,7 +106,6 @@ class Primers_Maken():
         # Moet seqEinde ook reverse zijn?
         seqEinde = self.Complementary(seqEinde)
         return seqBegin, seqEinde
-
 
     def maakParen(self, einde, seqBegin, seqEinde, maxPcr):
         ''' checkt elke begin primer met een eind primer voor of ze matchen
@@ -120,13 +131,15 @@ class Primers_Maken():
                 ePositie = int(k.split(':')[1]) + einde
                 verschil = ePositie - bPositie
                 tmVerschil = seqBegin[i][2] - seqEinde[k][2]
-                if (verschil <= maxPcr) and ((tmVerschil >= -2) and(tmVerschil <= 2)):
+                if (verschil <= maxPcr) and (
+                        (tmVerschil >= -2) and (tmVerschil <= 2)):
                     primerParen.append([verschil,
                                         [i, seqBegin[i][0], seqBegin[i][1],
                                          seqBegin[i][2]],
                                         [k, seqEinde[k][0], seqEinde[k][1],
                                          seqEinde[k][2]]])
         return primerParen
+
 
 if __name__ == "__main__":
     Primers_Maken()
