@@ -7,11 +7,6 @@ class Primers_Maken():
         self.einde = int(einde)
         self.uitvoeren()
 
-
-
-    def getPrimer(self):
-        return self.primer1
-
     def uitvoeren(self):
         seqBegin, seqEinde = self.Knip(self.seq, self.begin, self.einde)
         primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin), self.CheckSequence(seqEinde), 420)
