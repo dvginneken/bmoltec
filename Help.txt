@@ -1,1 +1,55 @@
-BAL BESTE POES
+Wat betekenen de knoppen:
+
+
+Afsluiten: 		Hiermee wordt het programma afgesloten.
+
+Volgende:		Door hier op te klikken wordt het welkom scherm verlaten en
+			het invoerscherm geopend. 
+
+Bladeren: 		Door hierop te drukken is het mogelijk om een bestand te 
+			selecteren als invoer voor de DNA sequentie.
+			
+Velden legen:		Verwijderd alle recent gemaakte invoer.
+
+Maak primers:		Als alle invoer correct is opgegeven wordt door op deze knop
+			te drukken het invoer scherm verlaten en het uitvoer scherm
+			geopend. Hier kunnen de resultaten worden bekeken van de invoer.
+
+Opnieuw: 		Klik hierop om terug te keren naar het invoerscherm. Ook worden
+			reeds ingevoerde velden leeg gemaakt.
+
+
+
+Wat betekend de invoer:
+
+
+DNA sequentie plakken of uploaden:	Plak of upload hier de gewenste sequentie waar
+					primers uitgehaald moeten worden.
+
+Linker/Rechtergrens:			Hier moet aangegeven worden met een getal tussen
+					welke twee posities de primer moet liggen.
+
+Maximale lengte van PCR product:	Hier moet worden opgegeven hoe lang het gewilde
+					PCR product moet worden.
+
+					
+
+Wat betekend de uitvoer:
+
+
+Forward primer: 			Hier wordt de gevonden primer weergegeven
+					genoteerd van 5' naar 3'.
+
+GC%:					Hier wordt het percentage weergeven van de
+					hoeveelheid G & C die in de sequentie voorkomen.
+
+TM:					Dit is de temperatuur waarbij de helft van het
+					dubbelstrengs DNA dissocieert tot enkelstrengs
+					DNA.
+
+Reverse primer:				De gevonden primer word van een 3' naar 5'
+					richting complementair weergeven, waardoor het
+					ook een 5' naar 3' richting krijgt.
+
+Maximale lengte van PCR product:	Hier word de gevonden lengte van het PCR
+					product weergegeven.			
