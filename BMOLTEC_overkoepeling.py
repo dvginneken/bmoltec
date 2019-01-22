@@ -5,7 +5,7 @@
 import wx
 import sys
 import webbrowser
-#import easygui
+import easygui
 
 from BMOLTEC_welkom import Panel1
 from BMOLTEC_invoer import Panel2
@@ -66,11 +66,9 @@ class Schermpje(wx.Frame):
              DNA sequentie input. Ook word dit veld leeg gemaakt mocht er al informatie staan"""
         event.GetEventObject().GetLabel()
         file = easygui.fileopenbox()
-        f = open(file, "r")
-        txt = f.readlines()
+        txt = ParseFile(file)
         self.invoer.invultekst1.Clear()
-        for i in txt:
-            self.invoer.invultekst1.write(str(i))
+        self.invoer.invultekst1.write(txt)
 
 
     def onButtonVolgende(self, event):
@@ -84,7 +82,7 @@ class Schermpje(wx.Frame):
     def onButtonHelp(self, event):
         """" Deze functie opent het help document wanneer er op de 'Help' knop gedrukt word."""
         webbrowser.open("Help.txt")
-        
+
 
     def onButtonMaakprimers(self, event):
         """" Deze functie verbergd het invoerscherm en laat het uitvoerscherm zien wanneer
@@ -114,7 +112,23 @@ class Schermpje(wx.Frame):
         self.invoer.Show()
         self.totbox.Layout()
 
-
+def ParseFile(filename):
+    '''
+    Parsed files op formaat die als voorbeeld is gegeven op onenote
+    :param filename: naam van de file die geopend moet worden
+    :return: string van met een sequentie
+    '''
+    file = open(filename,'r')
+    seq = file.readlines()
+    seqfasta = [item.strip() for item in seq] #haalt enters eruit
+    seq = []
+    for i in seqfasta:
+        if i: #checkt of i leeg is. Anders geeft hij een error bij de volgende if
+            if not(i[0] == '>'): #check of het een fasta header is
+                seq.append(i)
+    seq = ''.join(seq)
+    seq = ''.join([i for i in seq if not i.isdigit()]) #haalt getallen eruit
+    return seq
 
 if __name__ == "__main__":
     app = wx.App()
