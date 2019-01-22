@@ -3,8 +3,6 @@
     __Klas__ = "Bin2A" """
 
 import wx
-#from BMOLTEC_overkoepeling import Schermpje
-from mees_primer import Primers_Maken
 
 
 class Panel3(wx.Panel):
@@ -12,77 +10,16 @@ class Panel3(wx.Panel):
     def __init__(self, parent):
         """" Hier worden de globale variabelen en de overige functies aangeroepen."""
         wx.Panel.__init__(self, parent, -1)
-        # self.global_vars()
-        #self.boxCreeren2()
         final = self.boxCreeren2()
         self.SetSizer(final)
 
 
-    # def global_vars(self):
-        """" Hier worden de teksten van het 'Uitvoer' panel gecreëerd samen met de buttons."""
-        #string = "output: " + self.primers
-        # self.tekst1 = wx.StaticText(self, -1, "poep")
-        # self.tekst2 = wx.StaticText(self, -1, "GC%:")
-        # self.tekst3 = wx.StaticText(self, -1, "TM:")
-        # self.tekst4 = wx.StaticText(self, -1, "Reverse primer:")
-        # self.tekst5 = wx.StaticText(self, -1, "GC%:")
-        # self.tekst6 = wx.StaticText(self, -1, "TM:")
-        # self.tekst7 = wx.StaticText(self, -1, "Lengte van PCR product:")
-        # font = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst1.SetFont(font)
-        # font2 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst2.SetFont(font2)
-        # font3 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst3.SetFont(font3)
-        # font4 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst4.SetFont(font4)
-        # font5 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst5.SetFont(font5)
-        # font6 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst6.SetFont(font6)
-        # font7 = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-        # self.tekst7.SetFont(font7)
-        # self.button1 = wx.Button(self, -1, "Afsluiten")
-        # self.button2 = wx.Button(self, -1, "Opnieuw")
-
-    # def boxCreeren(self):
-        """" Deze functie creëert de UI van de 'Uitvoer' paneel. De onderkant slaat op hoe
-             de totale indeling eruit gaat zien."""
-        # posities1 = wx.BoxSizer(wx.HORIZONTAL)  # Start en stop posities
-        # posities1.Add(self.tekst1, 1, wx.EXPAND)
-        # posities2 = wx.BoxSizer(wx.HORIZONTAL)
-        # posities2.Add(self.tekst2, 1, wx.EXPAND)
-        # posities3 = wx.BoxSizer(wx.HORIZONTAL)
-        # posities3.Add(self.tekst3, 1, wx.EXPAND)
-        # posities4 = wx.BoxSizer(wx.HORIZONTAL)
-        # posities4.Add(self.tekst4, 1, wx.EXPAND)
-        # posities5 = wx.BoxSizer(wx.HORIZONTAL)
-        # posities5.Add(self.tekst5, 1, wx.EXPAND)
-        # posities6 = wx.BoxSizer(wx.HORIZONTAL)
-        # posities6.Add(self.tekst6, 1, wx.EXPAND)
-        # posities7 = wx.BoxSizer(wx.HORIZONTAL)
-        # posities7.Add(self.tekst7, 1, wx.EXPAND)
-        # onderkant1 = wx.BoxSizer(wx.VERTICAL)  # Tekst + posities
-        # onderkant1.Add(posities1, 1, wx.EXPAND)
-        # onderkant1.Add(posities2, 1, wx.EXPAND)
-        # onderkant1.Add(posities3, 1, wx.EXPAND)
-        # onderkant1.Add(posities4, 1, wx.EXPAND)
-        # onderkant1.Add(posities5, 1, wx.EXPAND)
-        # onderkant1.Add(posities6, 1, wx.EXPAND)
-
-        # self.button1 = wx.Button(self, -1, "Afsluiten")
-        # self.button2 = wx.Button(self, -1, "Opnieuw")
-
-        #onderkant1.Add(posities7, 1, wx.EXPAND)
-        # self.onderkant = wx.BoxSizer(wx.HORIZONTAL)  # Gehele onderkant
-        # self.onderkant.Add(onderkant1, 1, wx.EXPAND)
 
     def boxCreeren2(self):
         """" Deze functie zorgt ervoor dat er ruimte komt tussen alle verschillende
              onderdelen in het 'Uitvoer' paneel."""
 
-        empy_box = wx.BoxSizer(wx.HORIZONTAL)
-        #tekstvar = self.tekst()
+        self.empy_box = wx.BoxSizer(wx.VERTICAL)
 
         self.button1 = wx.Button(self, -1, "Afsluiten")
         self.button2 = wx.Button(self, -1, "Opnieuw")
@@ -94,25 +31,11 @@ class Panel3(wx.Panel):
         panel = wx.Panel(self, -1)
 
         eindbox = wx.BoxSizer(wx.VERTICAL)
-        eindbox.Add(panel,5,wx.EXPAND)
-        eindbox.Add(empy_box,5,wx.EXPAND)
+        eindbox.Add(panel,1,wx.EXPAND)
+        eindbox.Add(self.empy_box,1,wx.EXPAND)
         eindbox.Add(dbox,1,wx.EXPAND)
-
         return eindbox
 
-        # self.panel1 = wx.Panel(self, -1)
-        # hbox = wx.BoxSizer(wx.HORIZONTAL)
-        # hbox.Add(self.panel1)
-        # self.panel2 = wx.Panel(self, -1)
-        # cbox = wx.BoxSizer(wx.HORIZONTAL)
-        # cbox.Add(self.panel2)
-        # self.panel3 = wx.Panel(self, -1)
-        # fbox = wx.BoxSizer(wx.HORIZONTAL)
-        # fbox.Add(self.panel3)
-        # box = wx.BoxSizer(wx.VERTICAL)
-        # box.Add(self.onderkant, 4, wx.EXPAND)
-        # box.Add(dbox, 1, wx.EXPAND)
-        # return dbox
 
 
 
@@ -139,7 +62,53 @@ class Panel3(wx.Panel):
             print("TM: ", primer2[3])
             print("\n")
 
+            primerteller = wx.StaticText(self, -1, "Primerpaar "+str(aantal_primerparen))
+            lengte = wx.StaticText(self, -1, "Lengte PCR product: "+str(a[0]))
+            f_primer = wx.StaticText(self, -1, "Forward Primer: "+str(primer1[1]))
+            f_gc = wx.StaticText(self, -1, "GC%: "+str(primer1[2]*100))
+            f_tm = wx.StaticText(self, -1, "Tm: "+str(primer1[3]))
+            r_primer = wx.StaticText(self, -1, "Reversed Primer: " +str(primer2[1]))
+            r_gc = wx.StaticText(self, -1, "GC%: "+str(primer2[2]*100))
+            r_tm = wx.StaticText(self, -1, "Tm: "+str(primer2[3])+"\n")
+
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            primerteller.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            lengte.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            f_primer.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            f_gc.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            f_tm.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            r_primer.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            r_gc.SetFont(font)
+            font = wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.NORMAL)
+            r_tm.SetFont(font)
+
+            primer_box = wx.BoxSizer(wx.HORIZONTAL)
+            primer_box.Add(primerteller, 1, wx.EXPAND)
+            primer_box.Add(lengte, 1, wx.EXPAND)
+
+            f_box = wx.BoxSizer(wx.HORIZONTAL)
+            f_box.Add(f_primer, 1, wx.EXPAND)
+            f_box.Add(f_gc, 1, wx.EXPAND)
+            f_box.Add(f_tm, 1, wx.EXPAND)
+
+            r_box = wx.BoxSizer(wx.HORIZONTAL)
+            r_box.Add(r_primer, 1, wx.EXPAND)
+            r_box.Add(r_gc, 1, wx.EXPAND)
+            r_box.Add(r_tm, 1, wx.EXPAND)
+
+
+            self.empy_box.Add(primer_box, 1, wx.EXPAND)
+            self.empy_box.Add(f_box, 1, wx.EXPAND)
+            self.empy_box.Add(r_box, 1, wx.EXPAND)
+
         print(aantal_primerparen)
+
 
 
 if __name__ == "__main__":
