@@ -8,6 +8,7 @@ from mees_primer import Primers_Maken
 
 
 class Panel3(wx.Panel):
+    primers = None
     def __init__(self, parent):
         """" Hier worden de globale variabelen en de overige functies aangeroepen."""
         wx.Panel.__init__(self, parent, -1)
@@ -19,7 +20,8 @@ class Panel3(wx.Panel):
 
     def global_vars(self):
         """" Hier worden de teksten van het 'Uitvoer' panel gecreëerd samen met de buttons."""
-        self.tekst1 = wx.StaticText(self, -1, "Forward primer:")
+        #string = "output: " + self.primers
+        self.tekst1 = wx.StaticText(self, -1, "poep")
         self.tekst2 = wx.StaticText(self, -1, "GC%:")
         self.tekst3 = wx.StaticText(self, -1, "TM:")
         self.tekst4 = wx.StaticText(self, -1, "Reverse primer:")
@@ -90,6 +92,10 @@ class Panel3(wx.Panel):
         box.Add(self.onderkant, 4, wx.EXPAND)
         box.Add(dbox, 1, wx.EXPAND)
         return box
+
+    def updatePrimers(self, primers):
+        self.primers = primers
+        print("primer: " , self.primers)
 
 
 if __name__ == "__main__":

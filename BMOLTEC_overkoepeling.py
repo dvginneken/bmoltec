@@ -95,6 +95,7 @@ class Schermpje(wx.Frame):
         self.stop = self.invoer.invultekst3.GetValue()
         self.primers = Primers_Maken(self.sequentie, self.start, self.stop)
         self.invoer.Hide()
+        self.uitvoer.updatePrimers(self.primers)
         self.uitvoer.Show()
         self.totbox.Layout()
 

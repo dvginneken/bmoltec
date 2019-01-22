@@ -16,6 +16,7 @@ class Primers_Maken():
         seqBegin, seqEinde = self.Knip(self.seq, self.begin, self.einde)
         primerParen = self.maakParen(self.einde, self.CheckSequence(seqBegin), self.CheckSequence(seqEinde), 420)
         self.primer1 = primerParen
+        print("Primer: " , self.primer1)
 
     def Complementary(self, strand):
         """geeft het complimentere terug"""
