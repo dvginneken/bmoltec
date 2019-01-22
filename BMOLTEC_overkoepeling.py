@@ -16,7 +16,7 @@ class Schermpje(wx.Frame):
     def __init__(self, parent, id, title):
         """" Hier worden de andere panels aangeroepen en knoppen gebonden. Het invoer en
              uitvoer scherm zijn verborgen zodat het welkom scherm als eerste verschijnt."""
-        wx.Frame.__init__(self, parent, id, title, size=(800, 500))
+        wx.Frame.__init__(self, parent, id, title, size=(1500, 800))
         self.welkom = Panel1(self)
         self.invoer = Panel2(self)
         self.uitvoer = Panel3(self)

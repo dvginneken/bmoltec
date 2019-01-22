@@ -13,7 +13,7 @@ class Panel3(wx.Panel):
         """" Hier worden de globale variabelen en de overige functies aangeroepen."""
         wx.Panel.__init__(self, parent, -1)
         # self.global_vars()
-        self.boxCreeren1()
+        #self.boxCreeren2()
         final = self.boxCreeren2()
         self.SetSizer(final)
 
@@ -45,7 +45,7 @@ class Panel3(wx.Panel):
         # self.button1 = wx.Button(self, -1, "Afsluiten")
         # self.button2 = wx.Button(self, -1, "Opnieuw")
 
-    def boxCreeren1(self):
+    # def boxCreeren(self):
         """" Deze functie creëert de UI van de 'Uitvoer' paneel. De onderkant slaat op hoe
              de totale indeling eruit gaat zien."""
         # posities1 = wx.BoxSizer(wx.HORIZONTAL)  # Start en stop posities
@@ -62,7 +62,7 @@ class Panel3(wx.Panel):
         # posities6.Add(self.tekst6, 1, wx.EXPAND)
         # posities7 = wx.BoxSizer(wx.HORIZONTAL)
         # posities7.Add(self.tekst7, 1, wx.EXPAND)
-        onderkant1 = wx.BoxSizer(wx.VERTICAL)  # Tekst + posities
+        # onderkant1 = wx.BoxSizer(wx.VERTICAL)  # Tekst + posities
         # onderkant1.Add(posities1, 1, wx.EXPAND)
         # onderkant1.Add(posities2, 1, wx.EXPAND)
         # onderkant1.Add(posities3, 1, wx.EXPAND)
@@ -70,38 +70,60 @@ class Panel3(wx.Panel):
         # onderkant1.Add(posities5, 1, wx.EXPAND)
         # onderkant1.Add(posities6, 1, wx.EXPAND)
 
-        self.button1 = wx.Button(self, -1, "Afsluiten")
-        self.button2 = wx.Button(self, -1, "Opnieuw")
+        # self.button1 = wx.Button(self, -1, "Afsluiten")
+        # self.button2 = wx.Button(self, -1, "Opnieuw")
 
         #onderkant1.Add(posities7, 1, wx.EXPAND)
-        self.onderkant = wx.BoxSizer(wx.HORIZONTAL)  # Gehele onderkant
-        self.onderkant.Add(onderkant1, 1, wx.EXPAND)
+        # self.onderkant = wx.BoxSizer(wx.HORIZONTAL)  # Gehele onderkant
+        # self.onderkant.Add(onderkant1, 1, wx.EXPAND)
 
     def boxCreeren2(self):
         """" Deze functie zorgt ervoor dat er ruimte komt tussen alle verschillende
              onderdelen in het 'Uitvoer' paneel."""
+
+        empy_box = wx.BoxSizer(wx.HORIZONTAL)
+        #tekstvar = self.tekst()
+
+        self.button1 = wx.Button(self, -1, "Afsluiten")
+        self.button2 = wx.Button(self, -1, "Opnieuw")
+
         dbox = wx.BoxSizer(wx.HORIZONTAL)
         dbox.Add(self.button1, 1, wx.EXPAND)
         dbox.Add(self.button2, 1, wx.EXPAND)
-        self.panel1 = wx.Panel(self, -1)
-        hbox = wx.BoxSizer(wx.HORIZONTAL)
-        hbox.Add(self.panel1)
-        self.panel2 = wx.Panel(self, -1)
-        cbox = wx.BoxSizer(wx.HORIZONTAL)
-        cbox.Add(self.panel2)
-        self.panel3 = wx.Panel(self, -1)
-        fbox = wx.BoxSizer(wx.HORIZONTAL)
-        fbox.Add(self.panel3)
-        box = wx.BoxSizer(wx.VERTICAL)
-        box.Add(self.onderkant, 4, wx.EXPAND)
-        box.Add(dbox, 1, wx.EXPAND)
-        return box
+
+        panel = wx.Panel(self, -1)
+
+        eindbox = wx.BoxSizer(wx.VERTICAL)
+        eindbox.Add(panel,5,wx.EXPAND)
+        eindbox.Add(empy_box,5,wx.EXPAND)
+        eindbox.Add(dbox,1,wx.EXPAND)
+
+        return eindbox
+
+        # self.panel1 = wx.Panel(self, -1)
+        # hbox = wx.BoxSizer(wx.HORIZONTAL)
+        # hbox.Add(self.panel1)
+        # self.panel2 = wx.Panel(self, -1)
+        # cbox = wx.BoxSizer(wx.HORIZONTAL)
+        # cbox.Add(self.panel2)
+        # self.panel3 = wx.Panel(self, -1)
+        # fbox = wx.BoxSizer(wx.HORIZONTAL)
+        # fbox.Add(self.panel3)
+        # box = wx.BoxSizer(wx.VERTICAL)
+        # box.Add(self.onderkant, 4, wx.EXPAND)
+        # box.Add(dbox, 1, wx.EXPAND)
+        # return dbox
+
+
 
     def updatePrimers(self, primers):
         self.primers = primers
         print("primer: " , self.primers)
+        aantal_primerparen = 0
+
 
         for a in self.primers:
+            aantal_primerparen+=1
             print("pcr product: ", a[0], "bp")
             primer1 = a[1]
             primer2 = a[2]
@@ -117,19 +139,13 @@ class Panel3(wx.Panel):
             print("TM: ", primer2[3])
             print("\n")
 
+        print(aantal_primerparen)
 
-
-            self.tekst7 = wx.StaticText(self, -1, str(a[0]))
-            font = wx.Font(15, wx.DEFAULT, wx.ITALIC, wx.BOLD)
-
-            posities7 = wx.BoxSizer(wx.HORIZONTAL)
-            posities7.Add(self.tekst7, 1, wx.EXPAND)
-        onderkant1 = wx.BoxSizer(wx.VERTICAL)
 
 if __name__ == "__main__":
     class Schermpje(wx.Frame):
         def __init__(self, parent, id, title):
-            wx.Frame.__init__(self, parent, id, title, size=(800, 400))
+            wx.Frame.__init__(self, parent, id, title, size=(5000, 2500))
             self.paneeltje = Panel3(self)
             self.Show(True)
 
