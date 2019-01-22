@@ -23,10 +23,12 @@ class Panel3(wx.Panel):
 
         self.button1 = wx.Button(self, -1, "Afsluiten")
         self.button2 = wx.Button(self, -1, "Opnieuw")
+        self.button3 = wx.Button(self, -1, "Zie alle primerparen")
 
         dbox = wx.BoxSizer(wx.HORIZONTAL)
         dbox.Add(self.button1, 1, wx.EXPAND)
         dbox.Add(self.button2, 1, wx.EXPAND)
+        dbox.Add(self.button3, 1, wx.EXPAND)
 
         panel = wx.Panel(self, -1)
 
